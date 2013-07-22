@@ -22,7 +22,8 @@ int main(int aArgc, char **appArgv)
 	{
 		if(readSSM(URG_sid, (char*)&urg_data, &time,-1)){	//読みにいく（if文はエラー処理）
 			GNU_Plot(&urg_data);	// Gnuplotに描画
-			usleep(200000);
+			// usleep(200000); //0.2秒
+			usleep(10000); //0.01秒
 		}
 	}
 	
