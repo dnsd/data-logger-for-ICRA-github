@@ -59,8 +59,8 @@ void TopURG_GetData(TopURG *urg_data)
 			for( i = 0; i < data->size; i++ )
 			{
 				urg_data->dist[i] = (double)data->data[i] / 1000.0;
-				urg_data->x[i] = urg_data->dist[i] * cos((-120.0 + 0.3519 * (double)i) * (M_PI / 180.0));
-				urg_data->y[i] = urg_data->dist[i] * sin((-120.0 + 0.3519 * (double)i) * (M_PI / 180.0));
+				urg_data->x[i] = urg_data->dist[i] * cos((-135.0 + 0.25 * (double)i) * (M_PI / 180.0));
+				urg_data->y[i] = urg_data->dist[i] * sin((-135.0 + 0.25 * (double)i) * (M_PI / 180.0));
 			}
 
 			/* Don't forget S2Sdd_End to unlock buffer */
