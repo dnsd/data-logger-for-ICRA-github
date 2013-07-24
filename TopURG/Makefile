@@ -27,5 +27,8 @@ ssm2plot:ssm2plot.c LRF.h
 TopURG2gnu:TopURG2gnu.cpp
 	g++ -o TopURG2gnu TopURG2gnu.cpp -lscip2awd -lm -lpthread -lssm
 
+ssm2csv_for_TopURG:ssm2csv_for_TopURG.cpp
+	g++ -o ssm2csv_for_TopURG ssm2csv_for_TopURG.cpp -lm -lssm
+
 clean:
 	rm ssm2plot urg2ssm3D urg2ssmR urg2ssmL urg2ssmB
