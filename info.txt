@@ -1,2 +1,11 @@
 ICRAのためのデータロガー。
 TopURGと3Dsensorのデータを同期しながら取得する。
+
+*SSM情報*
+id:0
+name:Top-URG
+type:LRF
+
+id:1
+name:Door-Sensor
+type:3Dsensor

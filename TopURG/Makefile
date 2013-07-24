@@ -18,8 +18,8 @@ urg2ssmL:urg2ssmL.c LRF.h
 urg2ssmB:urg2ssmB.c LRF.h
 	$(CC) $@ $^ $(LIB_DIR) $(LIB_DIR) $(OPT)
 
-urg2ssm:urg2ssm.c LRF.h
-	$(CC) $@ $^ $(LIB_DIR) $(LIB_DIR) $(OPT)
+urg2ssm:urg2ssm.cpp LRF.h
+	g++ -o $@ $^ $(LIB_DIR) $(LIB_DIR) $(OPT)
 
 ssm2plot:ssm2plot.c LRF.h
 	$(CC) $@ $^ $(LIB_DIR) $(LIB_DIR) $(OPT)

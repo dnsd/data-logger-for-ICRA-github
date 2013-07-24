@@ -12,10 +12,10 @@ void GNU_Init(void)
 {
 	// Gnuplotのオープン
 	gnu_p = popen(GP_PATH, "w");
-	fprintf(gnu_p, "set xrange [-5:5]\n");
-	fprintf(gnu_p, "set xlabel \"x[m]\"\n");
-	fprintf(gnu_p, "set yrange [-5:5]\n");
-	fprintf(gnu_p, "set ylabel \"y[m]\"\n");
+	fprintf(gnu_p, "set xrange [-5000:5000]\n");
+	fprintf(gnu_p, "set xlabel \"x[mm]\"\n");
+	fprintf(gnu_p, "set yrange [-5000:5000]\n");
+	fprintf(gnu_p, "set ylabel \"y[mm]\"\n");
 	fprintf(gnu_p, "set grid\n");
 	fprintf(gnu_p, "set size square\n");
 	fprintf(gnu_p, "unset key\n");
@@ -62,7 +62,8 @@ int main(int aArgc, char **appArgv)
 	{
 		if(readSSM(URG_sid, (char*)&urg_data, &time,-1)){	//読みにいく（if文はエラー処理）
 			GNU_Plot(&urg_data);	// Gnuplotに描画
-			usleep(200000);
+			// usleep(200000); //0.2秒待機
+			usleep(100000); //0.1秒待機
 		}
 	}
 	
