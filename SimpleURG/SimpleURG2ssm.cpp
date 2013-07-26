@@ -17,8 +17,8 @@
 
 #include <scip2awd.h>
 #include "LRF.h"
-#include <ssm.h>
-#include <math.h>
+#include <ssm.hpp>
+#include <cmath>
 
 using namespace std;
 
@@ -49,11 +49,11 @@ void ctrlc( int aN )
 int main( int aArgc, char **appArgv )
 {
   /* URG2SSM */
-  SimURG SCAN_DATA;
   initSSM();
+  SimURG SCAN_DATA;
   SSM_sid SimURG_sid;
   double utime;
-  SimURG_sid=createSSM_time("Sim-URG",1,sizeof(SimURG),0.5,0.025);
+  SimURG_sid = createSSM_time("Sim-URG",1,sizeof(SimURG),1,0.1);
   
   S2Port *port; // Device Prot
   S2Sdd_t buf; // Data recive dual buffer
@@ -92,7 +92,7 @@ int main( int aArgc, char **appArgv )
   /* Demand sending me scanned data */
   /* Data will be recived in another thread  */
   /* MS command */
-  Scip2CMD_StartMS( port, 0, 682, 1, 0, 0, &buf, SCIP2_ENC_2BYTE );
+  Scip2CMD_StartMS( port, 44, 725, 1, 0, 0, &buf, SCIP2_ENC_2BYTE );
 
   //SSMのLRF_RANGE_DATA初期化
   for(j=0;j<681;j++)
@@ -129,7 +129,8 @@ int main( int aArgc, char **appArgv )
     	  //正面の距離データだけ表示
     	  // printf( "Front Dist [m] =  %lf\n", SCAN_DATA.dist[data->size/2]);
         cout << "Front Dist [mm] = " << SCAN_DATA.dist[data->size/2] << endl;
-    	  usleep(150000); // 0.15秒
+    	  // usleep(150000); // 0.15秒
+        usleep(1000); //debug
     	  /* Don't forget S2Sdd_End to unlock buffer */
     	  S2Sdd_End( &buf );
     	}
