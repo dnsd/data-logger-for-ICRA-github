@@ -27,6 +27,8 @@ int main( int aArgc, char **appArgv )
 	// ファイル操作
 	ofstream ofs;
 	ofs.open("TopURG_DATA.csv");
+	cout.precision(16);
+	ofs.precision(16);
 
 	while(1)
 	{
