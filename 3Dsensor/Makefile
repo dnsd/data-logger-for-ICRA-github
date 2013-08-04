@@ -20,6 +20,8 @@ connect:connect.c
 	gcc -o connect connect.c -lssm -lm
 rp:rp.c
 	gcc -o rp rp.c -lssm -lm
+connect2:connect2.cpp
+	g++ -o connect2 connect2.cpp -lssm -lm
 scandataR2:scandataR2.cpp
 	gcc scandataR2.cpp  -lglut -lGLU -lGL -lm -lssm -o scandataR2
 objectR:objectR.cpp

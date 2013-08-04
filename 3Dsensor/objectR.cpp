@@ -13,8 +13,8 @@
 
 #define POINTSIZE 2
 
-#define SENSOR_HEIGHT 2500
-// #define SENSOR_HEIGHT 3200
+// #define SENSOR_HEIGHT 2500
+#define SENSOR_HEIGHT 3200
 #define STEP_NUM_MAX 2720
 
 using namespace std;
@@ -167,45 +167,45 @@ void display(void)
         glVertex3d(0.0, 0.0, -SENSOR_HEIGHT);
         glEnd();
 
-        //円周を線だけで表示(1000)
-	    glBegin( GL_LINE_LOOP );
-	    float cx, cy, cz; 
-	    glColor3f( 0.0, 0.0, 0.0 );//white
-	    for(int i=0;i<=180;i++){
-	    cx = 1000.0*sin(M_PI*(double)i/(double)180.0);
-	    cy = 1000.0*cos(M_PI*(double)i/(double)180.0);
-	    cz = -SENSOR_HEIGHT;
-	    glVertex3f( cx, cy, cz );
-	    }
-	    glEnd();
+        // //円周を線だけで表示(1000)
+	//     glBegin( GL_LINE_LOOP );
+	//     float cx, cy, cz; 
+	//     glColor3f( 0.0, 0.0, 0.0 );//white
+	//     for(int i=0;i<=180;i++){
+	//     cx = 1000.0*sin(M_PI*(double)i/(double)180.0);
+	//     cy = 1000.0*cos(M_PI*(double)i/(double)180.0);
+	//     cz = -SENSOR_HEIGHT;
+	//     glVertex3f( cx, cy, cz );
+	//     }
+	//     glEnd();
 
-	    //円周を線だけで表示(2000)
-	    glBegin( GL_LINE_LOOP );
-	    cx = 0.0;
-	    cy = 0.0;
-	    cz = 0.0;
-	    glColor3f( 0.0, 0.0, 0.0 );//white
-	    for(int i=0;i<=180;i++){
-	    cx = 2000.0*sin(M_PI*(float)i/(float)180.0);
-	    cy = 2000.0*cos(M_PI*(float)i/(float)180.0);
-	    cz = -SENSOR_HEIGHT;
-	    glVertex3f( cx, cy, cz );
-	    }
-	    glEnd();
+	//     //円周を線だけで表示(2000)
+	//     glBegin( GL_LINE_LOOP );
+	//     cx = 0.0;
+	//     cy = 0.0;
+	//     cz = 0.0;
+	//     glColor3f( 0.0, 0.0, 0.0 );//white
+	//     for(int i=0;i<=180;i++){
+	//     cx = 2000.0*sin(M_PI*(float)i/(float)180.0);
+	//     cy = 2000.0*cos(M_PI*(float)i/(float)180.0);
+	//     cz = -SENSOR_HEIGHT;
+	//     glVertex3f( cx, cy, cz );
+	//     }
+	//     glEnd();
 
-	    //円周を線だけで表示(3000)
-	    glBegin( GL_LINE_LOOP );
-	    cx = 0.0;
-	    cy = 0.0;
-	    cz = 0.0;
-	    glColor3f( 0.0, 0.0, 0.0 );//white
-	    for(int i=0;i<=180;i++){
-	    cx = 3000.0*sin(M_PI*(float)i/(float)180.0);
-	    cy = 3000.0*cos(M_PI*(float)i/(float)180.0);
-	    cz = -SENSOR_HEIGHT;
-	    glVertex3f( cx, cy, cz );
-	    }
-	    glEnd();
+	//     //円周を線だけで表示(3000)
+	//     glBegin( GL_LINE_LOOP );
+	//     cx = 0.0;
+	//     cy = 0.0;
+	//     cz = 0.0;
+	//     glColor3f( 0.0, 0.0, 0.0 );//white
+	//     for(int i=0;i<=180;i++){
+	//     cx = 3000.0*sin(M_PI*(float)i/(float)180.0);
+	//     cy = 3000.0*cos(M_PI*(float)i/(float)180.0);
+	//     cz = -SENSOR_HEIGHT;
+	//     glVertex3f( cx, cy, cz );
+	//     }
+	//     glEnd();
 
         //センサ
         glPushMatrix();
