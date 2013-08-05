@@ -8,6 +8,7 @@
 #include <string.h>	/* memset()に必要 */
 #include <unistd.h>	/* close()に必要 */
 #include <math.h>
+#include <fstream> //ofstreamに使用
 
 using namespace std;
 
@@ -15,6 +16,8 @@ using namespace std;
 
 #define STEP_NUM 2880 //ステップ数（片道）
 #define STEP_NUM_PER_LINE 144//ステップ数（1ラインあたり）
+
+ofstream ofs;
 
 int main(int argc, char *argv[])
 {
@@ -53,7 +56,7 @@ int main(int argc, char *argv[])
 	usleep(1000000); //1秒待機
 
 	//-サーバからデータを受信-//
-	int LissStringLen = (8 * STEP_NUM_PER_LINE) + 18; //angleデータの長さ
+	int LissStringLen = (12 * STEP_NUM_PER_LINE) + 18; //angleデータの長さ
 	for (int i = 0; i < 40; i++)
 	{
 		for (int j = 0; j < LissStringLen; j++)
@@ -73,6 +76,17 @@ int main(int argc, char *argv[])
 	{
 		cout << angle_data_buf[i][12] << endl;
 	}
+
+	ofs.open("debug.txt");
+	for (int i = 0; i < 40; i++)
+	{
+		for (int j = 0; j < LissStringLen; j++)
+		{
+			ofs << angle_data_buf[i][j];
+		}
+		ofs << endl;
+	}
+	ofs.close();
 
 	close(sock);
 	exit(0);
