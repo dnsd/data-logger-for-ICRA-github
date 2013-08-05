@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 	//-----angleデータを取得-----//
 	//-サーバにメッセージを送信-//
 	memset(&sensorAddr, 0, sizeof(sensorAddr));		/* 構造体にゼロを埋める */
-	SendTextLen = strlen(toSendText1);	/* 入力データの長さを調べる */
+	SendTextLen = strlen(toSendText1)+1;	/* 入力データの長さを調べる */
 	if (send(sock, toSendText1, SendTextLen, 0) != SendTextLen)
 	{
 		printf("send() sent a different number of bytes than expected");
