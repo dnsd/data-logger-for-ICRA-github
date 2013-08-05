@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 	struct sockaddr_in sensorAddr;/* センサーのアドレス */
 	unsigned short sensorPort;	/* センサーのポート番号 */
 	const char *toSendText1 = "#TD2LISS\n";/* センサーに送信する文字列 */
+	const char *toSendText2 = "#TD2STOP\n";/* センサーに送信する文字列 */
 	// char echoBuffer[RCVBUFSIZE];	/* エコー文字列用のバッファ */
 	unsigned int SendTextLen;	/* エコーする文字列のサイズ */
 	int bytesRcvd, totalBytesRcvd;	/* 一回のrecv()で読み取られるバイト数と全バイト数 */
@@ -77,22 +78,60 @@ int main(int argc, char *argv[])
 		cout << angle_data_buf[i][12] << endl;
 	}
 
-	ofs.open("debug.txt");
-	for (int i = 0; i < 40; i++)
+	//----計測停止要求----//
+	//-サーバにメッセージを送信-//
+	memset(&sensorAddr, 0, sizeof(sensorAddr));		/* 構造体にゼロを埋める */
+	SendTextLen = strlen(toSendText2)+1;	/* 入力データの長さを調べる */
+	if (send(sock, toSendText2, SendTextLen, 0) != SendTextLen)
 	{
-		for (int j = 0; j < LissStringLen; j++)
-		{
-			ofs << angle_data_buf[i][j];
-		}
-		ofs << endl;
+		printf("send() sent a different number of bytes than expected");
 	}
-	ofs.close();
+	printf("sending...\n");
+	usleep(1000000); //1秒待機
+
+	//-サーバからデータを受信-//
+	char msg_buf[12];
+	for (int i = 0; i < 12; i++)
+	{
+		char temp_c;
+		recv(sock, &temp_c, 1, 0);
+		if (temp_c == '\n')
+		{
+			msg_buf[i] = '\0';
+			break;
+		}
+		msg_buf[i] = temp_c;
+	}
+
+	for (int i = 0; i < 12; i++)
+	{
+		cout << msg_buf[i];
+	}
+	cout << endl;
+
+
+	// ofs.open("debug.txt");
+	// for (int i = 0; i < 40; i++)
+	// {
+	// 	for (int j = 0; j < LissStringLen; j++)
+	// 	{
+	// 		ofs << angle_data_buf[i][j];
+	// 	}
+	// 	ofs << endl;
+	// }
+	// ofs.close();
+
+	// char extra_data[1000];
+	// for (int i = 0; i < 1000; ++i)
+	//  {
+	//  	char temp_c;
+	//  	cout << "!" << endl;
+	//  	// if(recv(sock, &temp_c, 1,0) == -1) break;
+	//  	recv(sock, &temp_c, 1,0);
+	//  } 
 
 	close(sock);
 	exit(0);
-
-
-
 
 
 	//-test-//
