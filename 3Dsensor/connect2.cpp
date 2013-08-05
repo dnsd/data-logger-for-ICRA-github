@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
 	unsigned short sensorPort;	/* センサーのポート番号 */
 	const char *toSendText1 = "#TD2LISS\n";/* センサーに送信する文字列 */
 	const char *toSendText2 = "#TD2STOP\n";/* センサーに送信する文字列 */
+	const char *toSendText3 = "#TD2GET\n";/* センサーに送信する文字列 */
 	// char echoBuffer[RCVBUFSIZE];	/* エコー文字列用のバッファ */
 	unsigned int SendTextLen;	/* エコーする文字列のサイズ */
 	int bytesRcvd, totalBytesRcvd;	/* 一回のrecv()で読み取られるバイト数と全バイト数 */
@@ -78,37 +79,122 @@ int main(int argc, char *argv[])
 		cout << angle_data_buf[i][12] << endl;
 	}
 
-	//----計測停止要求----//
+	// //----計測停止要求----//
+	// //-サーバにメッセージを送信-//
+	// memset(&sensorAddr, 0, sizeof(sensorAddr));		/* 構造体にゼロを埋める */
+	// SendTextLen = strlen(toSendText2)+1;	/* 入力データの長さを調べる */
+	// if (send(sock, toSendText2, SendTextLen, 0) != SendTextLen)
+	// {
+	// 	printf("send() sent a different number of bytes than expected");
+	// }
+	// printf("sending...\n");
+	// usleep(1000000); //1秒待機
+
+	// //-サーバからデータを受信-//
+	// char msg_buf[12];
+	// for (int i = 0; i < 12; i++)
+	// {
+	// 	char temp_c;
+	// 	recv(sock, &temp_c, 1, 0);
+	// 	if (temp_c == '\n')
+	// 	{
+	// 		msg_buf[i] = '\0';
+	// 		break;
+	// 	}
+	// 	msg_buf[i] = temp_c;
+	// }
+
+	// for (int i = 0; i < 12; i++)
+	// {
+	// 	cout << msg_buf[i];
+	// }
+	// cout << endl;
+
+	//----センサデータ取得----//
 	//-サーバにメッセージを送信-//
-	memset(&sensorAddr, 0, sizeof(sensorAddr));		/* 構造体にゼロを埋める */
-	SendTextLen = strlen(toSendText2)+1;	/* 入力データの長さを調べる */
-	if (send(sock, toSendText2, SendTextLen, 0) != SendTextLen)
-	{
-		printf("send() sent a different number of bytes than expected");
-	}
-	printf("sending...\n");
-	usleep(1000000); //1秒待機
+	// memset(&sensorAddr, 0, sizeof(sensorAddr));		/* 構造体にゼロを埋める */
+	// SendTextLen = strlen(toSendText3)+1;	/* 入力データの長さを調べる */
+	// if (send(sock, toSendText3, SendTextLen, 0) != SendTextLen)
+	// {
+	// 	printf("send() sent a different number of bytes than expected");
+	// }
+	// printf("send\n");
+	// usleep(1000000); //1秒待機
 
 	//-サーバからデータを受信-//
-	char msg_buf[12];
-	for (int i = 0; i < 12; i++)
-	{
-		char temp_c;
-		recv(sock, &temp_c, 1, 0);
-		if (temp_c == '\n')
-		{
-			msg_buf[i] = '\0';
-			break;
-		}
-		msg_buf[i] = temp_c;
-	}
+	// ofs.open("debug.txt");
 
-	for (int i = 0; i < 12; i++)
-	{
-		cout << msg_buf[i];
-	}
-	cout << endl;
+	// char header_buf[26];
+	// char scandata_buf[20][1177];
+	// char footer_buf[33];
+	// for (int i = 0; i < 26; i++)
+	// {
+	// 	char temp_c;
+	// 	recv(sock, &temp_c, 1, 0);
+	// 	if (temp_c == '\n')
+	// 	{
+	// 		header_buf[i] = '\0';
+	// 		break;
+	// 	}
+	// 	header_buf[i] = temp_c;
+	// 	ofs << header_buf[i];
+	// }
+	// ofs << endl;
 
+	// cout << "!" << endl;
+
+	// for (int i = 0; i < 20; i++)
+	// {
+	// 	cout << "!" << endl;
+	// 	for (int j = 0; j < 1177; j++)
+	// 	{
+	// 		char temp_c;
+	// 		recv(sock, &temp_c, 1, 0);
+	// 		if (temp_c == '\n')
+	// 		{
+	// 			scandata_buf[i][j] = '\0';
+	// 			break;
+	// 		}
+	// 		scandata_buf[i][j] = temp_c;
+	// 		ofs << scandata_buf[i][j];
+	// 	}
+	// 	ofs << endl;
+	// }	
+
+	// cout << "!" << endl;
+
+	// for (int i = 0; i < 33; i++)
+	// {
+	// 	char temp_c;
+	// 	recv(sock, &temp_c, 1, 0);
+	// 	if (temp_c == '\n')
+	// 	{
+	// 		footer_buf[i] = '\0';
+	// 		break;
+	// 	}
+	// 	footer_buf[i] = temp_c;
+	// }
+
+	// for (int i = 0; i < 20; i++)
+	// {
+	// 	for (int j = 8; j < 11; j++)
+	// 	{
+	// 		cout << scandata_buf[i][j];
+	// 	}
+	// 	cout << endl;
+	// }
+	// ofs.close();
+
+	// for (int i = 0; i < 1000; ++i)
+	// {
+	// 	char temp_c;
+	// 	recv(sock, &temp_c, 1, 0);
+	// 	if (temp_c == '\n')
+	// 	{
+	// 		break;
+	// 	}
+	// 	cout << temp_c;
+	// }
 
 	// ofs.open("debug.txt");
 	// for (int i = 0; i < 40; i++)
