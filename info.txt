@@ -9,3 +9,5 @@ type:LRF
 id:1
 name:Door-Sensor
 type:3Dsensor
+
+test
